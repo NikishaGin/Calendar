@@ -16,12 +16,14 @@ export const AppRouter = () => {
                 {privateRoutes.map(privateRoutes =>
                     <Route key={privateRoutes.path}  path={privateRoutes.path} element={<Event/>}/>
                 )}
+                <Route path="*" element={<Event/>}/>
             </Routes>
             :
             <Routes>
                 {publicRoutes.map(publicRoutes =>
                     <Route key={publicRoutes.path} path={publicRoutes.path} element={<Login/>}/>
                 )}
+                <Route path="*" element={<Login/>}/>
             </Routes>
 
     );

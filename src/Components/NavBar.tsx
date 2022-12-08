@@ -3,11 +3,16 @@ import {Layout, Menu, Row} from "antd";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../Router";
 import {useTypedSelector} from "../Hooks/useTypedSelector";
+import {useActions} from "../Hooks/useActions";
 
 export const NavBar = () => {
 
+
+
     const router = useNavigate()
     const {isAuth} = useTypedSelector(state => state.isAuth)
+
+    const {logout} = useActions()
 
     return (
         <Layout.Header>
@@ -15,7 +20,7 @@ export const NavBar = () => {
                 {isAuth ?
                     <Menu theme="dark" mode="horizontal" selectable={false}>
                         <div style={{color: "white"}}>Nikita</div>
-                        <Menu.Item key={1}>Выйти</Menu.Item>
+                        <Menu.Item key={1} onClick={logout}>Выйти</Menu.Item>
                     </Menu>
                     :
                     <Menu theme="dark" mode="horizontal" selectable={false}>

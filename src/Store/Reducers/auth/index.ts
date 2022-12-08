@@ -1,26 +1,29 @@
-export type AuthAction = authType
+import {AuthAction, AuthActionEnum, AuthState} from "./types";
+import {IUser} from "../../../Models/IUser";
 
-type authState = {
-    isAuth: boolean
+const initialState: AuthState = {
+    isAuth: false,
+    user: {} as IUser,
+    isLoading: false,
+    error: '',
 }
 
-const initialState: authState = {
-    isAuth: false
-}
-
-export const authReducers = (state = initialState, action: AuthAction): authState => {
+export const authReducers = (state = initialState, action: AuthAction): AuthState => {
     switch (action.type) {
-        case "SET_AUTH": {
-            return {...state , isAuth: action.payload}
+        case AuthActionEnum.SET_AUTH: {
+            return {...state, isAuth: action.payload, isLoading: false}
+        }
+        case AuthActionEnum.SET_USER: {
+            return {...state, user: action.payload}
+        }
+        case AuthActionEnum.SET_IS_LOADING: {
+            return {...state, isLoading: action.payload}
+        }
+        case AuthActionEnum.SET_ERROR: {
+            return {...state, error: action.payload, isLoading: false}
         }
         default:
             return state
     }
 }
 
-
-
-export type authType = ReturnType<typeof authAC>
-export const authAC = (payload: boolean) => {
-    return {type: 'SET_AUTH',payload} as const
-}
